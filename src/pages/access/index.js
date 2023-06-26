@@ -1,5 +1,5 @@
 import Comment from "@/componants/comment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Access() {
   const [inputText, setInputText] = useState("");
@@ -12,7 +12,6 @@ export default function Access() {
         ...currentComments,
       ];
     });
-    console.log(comments);
     setInputText("");
   }
 
@@ -25,6 +24,7 @@ export default function Access() {
         className="flex gap-2 bg-gray-300 h-10 rounded-lg"
         onSubmit={(e) => {
           e.preventDefault();
+          if (inputText === "") return;
           AddComment();
         }}
       >
@@ -40,13 +40,17 @@ export default function Access() {
         />
         <button className="pr-2">Share</button>
       </form>
-      <div>No Comments To Upvote Yet!</div>
-      <div>
-        {comments.map((comment) => (
-          <Comment props={comment} key={comment.id} />
-        ))}
-        <Comment props={{ text: "fefd" }}></Comment>
-      </div>
+      {comments.length > 0 ? (
+        <div>
+          {comments
+            .sort((a, b) => a.number < b.number)
+            .map((comment) => (
+              <Comment props={comment} key={comment.id} comments={comments} />
+            ))}
+        </div>
+      ) : (
+        <div>No Comments To Upvote Yet!</div>
+      )}
     </main>
   );
 }
