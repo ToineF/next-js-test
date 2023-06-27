@@ -1,5 +1,5 @@
 import Comment from "@/componants/comment";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Access() {
   const [inputText, setInputText] = useState("");

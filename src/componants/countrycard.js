@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function CountryCard({ props }) {
   return (
     <div className="bg-red-400 p-5 text-center rounded border-2 border-red-800">
