@@ -11,9 +11,21 @@ export default function Layout({ children }) {
           </Link>
         </div>
         <div className="flex gap-4">
-          <LayoutButton link="/about" text="About" color="green" />
-          <LayoutButton link="/access" text="Access" color="cyan" />
-          <LayoutButton link="/countries" text="Countries" color="blue" />
+          <LayoutButton
+            link="/about"
+            text="About"
+            color="bg-green-500 hover:bg-green-600"
+          />
+          <LayoutButton
+            link="/access"
+            text="Access"
+            color="bg-blue-500 hover:bg-blue-600"
+          />
+          <LayoutButton
+            link="/countries"
+            text="Countries"
+            color="bg-cyan-500 hover:bg-cyan-600"
+          />
         </div>
       </div>
       {children}
