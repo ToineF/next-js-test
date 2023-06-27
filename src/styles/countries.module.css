@@ -1,0 +1,9 @@
+.cardscontainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  grid-auto-flow: row;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
+  text-align: center;
+}
