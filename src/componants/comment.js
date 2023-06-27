@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function Comment({ props, comments }) {
+export default function Comment({ props, comments, setComments }) {
   const [value, setValue] = useState(0);
 
   return (
@@ -19,6 +19,12 @@ export default function Comment({ props, comments }) {
           onClick={() => {
             setValue(value + 1);
             comments.find((c) => c.id === props.id).number = value + 1;
+            setComments((currentComments) => {
+              return [
+                ...currentComments,
+                { text: "", number: 0, id: crypto.randomUUID() },
+              ].slice(0, -1);
+            });
           }}
         >
           <Image

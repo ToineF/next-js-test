@@ -40,12 +40,19 @@ export default function Access() {
         />
         <button className="pr-2">Share</button>
       </form>
+      {/*Just in case the CSS breaks */}
+      <div className="bg-gray-50 border-2 border-gray-300 rounded flex justify-between gap-4 max-w-full"></div>
       {comments.length > 0 ? (
         <div>
           {comments
             .sort((a, b) => a.number < b.number)
             .map((comment) => (
-              <Comment props={comment} key={comment.id} comments={comments} />
+              <Comment
+                props={comment}
+                key={comment.id}
+                comments={comments}
+                setComments={setComments}
+              />
             ))}
         </div>
       ) : (
