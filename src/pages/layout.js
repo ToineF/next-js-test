@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LayoutButton from "@/componants/layoutbutton";
 
 export default function Layout({ children }) {
   return (
@@ -10,16 +11,9 @@ export default function Layout({ children }) {
           </Link>
         </div>
         <div className="flex gap-4">
-          <Link href={"/about"}>
-            <button className="rounded-md px-4 py-2 bg-green-500 text-gray-50 hover:bg-green-600">
-              About&nbsp;&nbsp;&nbsp;&gt;
-            </button>
-          </Link>
-          <Link href={"/access"}>
-            <button className="rounded-md px-4 py-2 bg-cyan-500 text-gray-50 hover:bg-cyan-600">
-              Access&nbsp;&nbsp;&nbsp;&gt;
-            </button>
-          </Link>
+          <LayoutButton link="/about" text="About" color="green" />
+          <LayoutButton link="/access" text="Access" color="cyan" />
+          <LayoutButton link="/countries" text="Countries" color="blue" />
         </div>
       </div>
       {children}
