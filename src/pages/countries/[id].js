@@ -1,3 +1,6 @@
+import CountryCard from "@/componants/countrycard";
+import styles from "../../styles/countries.module.css";
+
 export const getStaticPaths = async () => {
   const res = await fetch("https://restcountries.com/v3.1/all");
   const data = await res.json();
@@ -14,22 +17,22 @@ export const getStaticProps = async (context) => {
   const res = await fetch(`https://restcountries.com/v3.1/all`);
   const data = await res.json();
   const country = data.filter((c) => c.name.common.includes(id));
-
   return {
     props: {
       country: country[0],
+      countries: data,
     },
   };
 };
 
-export default function CountryID({ country }) {
+export default function CountryID({ country, countries }) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-start gap-8 p-24">
       <h1 className="font-bold text-lg">
         {country.name.common} {country.flag}
       </h1>
       <div>
-        <p>
+        <div>
           <p>{`${country.name.common} is a${
             country.independent ? "n " : " not "
           } independant country located in ${country.region}.`}</p>
@@ -42,7 +45,7 @@ export default function CountryID({ country }) {
                 }`
               : ` is ${Object.values(country.languages)}`
           }.`}</p>
-        </p>
+        </div>
       </div>
       <div className="flex flex-col gap-2">
         <p>
@@ -68,10 +71,19 @@ export default function CountryID({ country }) {
           {country.independent ? "Is Independent" : "Is not independent"}
         </p>
       </div>
-      <div>
-        <p className="text-lg mt-2">
+      <div className="w-1/2">
+        <p className="text-lg my-4 text-center">
           <u>Neighbour Countries:</u>
         </p>
+        <div className={styles.cardscontainer}>
+          {country.borders === undefined
+            ? "No neighbours..."
+            : countries
+                .filter((c) => country.borders.includes(c.cca3))
+                .map((c) => {
+                  return <CountryCard props={c} key={country.name.common} />;
+                })}
+        </div>
       </div>
     </div>
   );
