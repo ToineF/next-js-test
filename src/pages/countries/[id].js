@@ -81,7 +81,7 @@ export default function CountryID({ country, countries }) {
             : countries
                 .filter((c) => country.borders.includes(c.cca3))
                 .map((c) => {
-                  return <CountryCard props={c} key={country.name.common} />;
+                  return <CountryCard props={c} key={c.name.common} />;
                 })}
         </div>
       </div>
