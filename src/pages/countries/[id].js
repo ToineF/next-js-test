@@ -49,22 +49,25 @@ export default function CountryID({ country, countries }) {
       </div>
       <div className="flex flex-col gap-2">
         <p>
-          <u>Continent:</u>
-          {" " + country.region}
+          <u>Continent:</u>{" "}
+          {country.region !== undefined ? country.region : "None"}
         </p>
         <p>
-          <u>Subregion:</u>
-          {" " + country.subregion}
+          <u>Subregion:</u>{" "}
+          {country.subregion !== undefined ? country.subregion : "None"}
         </p>
         <p>
-          <u>Capital:</u> {" " + country.capital}
+          <u>Capital:</u>{" "}
+          {country.capital !== undefined ? country.capital : "None"}
         </p>
         <p>
           <u>Population:</u> {" " + country.population}
         </p>
         <p>
           <u>Language{Object.keys(country.languages).length > 1 ? "s" : ""}:</u>{" "}
-          {Object.values(country.languages).join(", ")}
+          {country.languages !== undefined
+            ? Object.values(country.languages).join(", ")
+            : "None"}
         </p>
         <p>
           <u>Independence:</u>{" "}
