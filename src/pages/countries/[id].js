@@ -11,12 +11,13 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const id = context.params.id;
-  const res = await fetch(`https://restcountries.com/v3.1/all/${id}`);
+  const res = await fetch(`https://restcountries.com/v3.1/all`);
   const data = await res.json();
-  console.log(data);
+  const country = data.filter((c) => c.name.common.includes(id));
+
   return {
     props: {
-      country: data,
+      country: country[0],
     },
   };
 };
@@ -24,8 +25,54 @@ export const getStaticProps = async (context) => {
 export default function CountryID({ country }) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-start gap-8 p-24">
-      {console.log(country)}
-      <p>COUNTRY PAGE</p>
+      <h1 className="font-bold text-lg">
+        {country.name.common} {country.flag}
+      </h1>
+      <div>
+        <p>
+          <p>{`${country.name.common} is a${
+            country.independent ? "n " : " not "
+          } independant country located in ${country.region}.`}</p>
+          <p>{`Its capital is ${country.capital} and the main language${
+            Object.keys(country.languages).length > 1
+              ? `s are ${
+                  Object.values(country.languages).slice(0, -1).join(", ") +
+                  " and " +
+                  Object.values(country.languages).slice(-1)
+                }`
+              : ` is ${Object.values(country.languages)}`
+          }.`}</p>
+        </p>
+      </div>
+      <div className="flex flex-col gap-2">
+        <p>
+          <u>Continent:</u>
+          {" " + country.region}
+        </p>
+        <p>
+          <u>Subregion:</u>
+          {" " + country.subregion}
+        </p>
+        <p>
+          <u>Capital:</u> {" " + country.capital}
+        </p>
+        <p>
+          <u>Population:</u> {" " + country.population}
+        </p>
+        <p>
+          <u>Language{Object.keys(country.languages).length > 1 ? "s" : ""}:</u>{" "}
+          {Object.values(country.languages).join(", ")}
+        </p>
+        <p>
+          <u>Independence:</u>{" "}
+          {country.independent ? "Is Independent" : "Is not independent"}
+        </p>
+      </div>
+      <div>
+        <p className="text-lg mt-2">
+          <u>Neighbour Countries:</u>
+        </p>
+      </div>
     </div>
   );
 }

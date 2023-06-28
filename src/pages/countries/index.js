@@ -34,7 +34,6 @@ export default function Countries({ data }) {
                   country.region.toLowerCase().includes(input)
               )
               .map((country) => {
-                console.log(country);
                 return (
                   <CountryCard props={country} key={country.name.common} />
                 );
