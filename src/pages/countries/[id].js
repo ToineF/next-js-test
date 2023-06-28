@@ -1,4 +1,4 @@
-import CountryCard from "@/componants/countrycard";
+import CountryCard from "@/components/countrycard";
 import styles from "../../styles/countries.module.css";
 
 export const getStaticPaths = async () => {

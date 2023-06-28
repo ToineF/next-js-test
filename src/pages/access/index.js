@@ -1,4 +1,4 @@
-import Comment from "@/componants/comment";
+import Comment from "@/components/comment";
 import { useState } from "react";
 
 export default function Access() {
@@ -40,10 +40,8 @@ export default function Access() {
         />
         <button className="pr-2">Share</button>
       </form>
-      {/*Just in case the CSS breaks */}
-      <div className="bg-gray-50 border-2 border-gray-300 rounded flex justify-between gap-4 max-w-full"></div>
       {comments.length > 0 ? (
-        <div>
+        <div className="flex flex-col gap-2">
           {comments
             .sort((a, b) => a.number < b.number)
             .map((comment) => (

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import LayoutButton from "@/componants/layoutbutton";
+import LayoutButton from "@/components/layoutbutton";
 
 export default function Layout({ children }) {
   return (
