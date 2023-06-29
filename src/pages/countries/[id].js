@@ -17,7 +17,6 @@ export default function CountryID() {
         <div>Fetching data...</div>
       ) : (
         <>
-          {console.log(id)}
           {countries
             .filter((c) => c.name.common.includes(id))
             .map((country) => {
