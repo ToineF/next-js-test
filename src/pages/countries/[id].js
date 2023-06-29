@@ -7,12 +7,8 @@ import { useRouter } from "next/router";
 export default function CountryID() {
   const { data, loading, error } = useFetch(getCountries);
   const countries = data;
-
   const { asPath } = useRouter();
-
-  const id = asPath.split("/").slice(-1)[0];
-
-  let country;
+  const id = asPath.split("/").slice(-1)[0].replaceAll("%20", " ");
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-start gap-8 p-24">
@@ -22,6 +18,7 @@ export default function CountryID() {
         <div>Fetching data...</div>
       ) : (
         <>
+          {console.log(id)}
           {countries
             .filter((c) => c.name.common.includes(id))
             .map((country) => {
